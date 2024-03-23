@@ -150,15 +150,7 @@ class SACagent:
     def save_memory(self, states, actions, rewards, next_states, dones):
         self.replay_buffer.append((states, actions, rewards, next_states, dones))
     
-    '''使用這個方法到 def update_weights會出問題 但有開始訓練'''
-    def take_action(self, states):
-        # 使用模型进行预测
-        action_probs = self.policy_network.predict(states)
-        # 选择概率最高的动作
-        actions = np.argmax(action_probs, axis=1)[0]
-        return actions
-    
-    '''使用這個方法會無法訓練（Demo所呈現的問題）'''
+    '''（Demo所呈現的問題:state）'''
     def take_action(self, states):
         states = np.array([states], dtype=np.float32)  # 确保输入的states是浮点数数组
         action_probs = self.policy_network(states) # 使用predict方法来得到动作概率
